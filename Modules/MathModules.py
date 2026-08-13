@@ -2,10 +2,10 @@ import math
 
 def distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance):
     oneU = 1.75         # This value is the U height of a rack
-    onePort = 0.50      # This value is the rough width of a port
-    topPort = -0.75     # This value is what is subtracted from "oneU" to get the middle point of the top port
-    middlePort = -0.85  # This value is what is subtracted from "oneU" to get the middle point of the middle port
-    lowerPort = 1.25    # This value is what is subtracted from "oneU" to get the middle point of the bottom port
+    onePort = 0.50      # This value is the rough width of a port (measure from 3 patch panels and AVG'd)
+    topPort = -0.75     # This value is what is subtracted from "oneU" to get the middle point of the top port (measured from a Cisco2960)
+    middlePort = -0.85  # This value is what is subtracted from "oneU" to get the middle point of the middle port (measured from a CiscoASA)
+    lowerPort = 1.25    # This value is what is subtracted from "oneU" to get the middle point of the bottom port (measured from a Cisco2960)
 
     # This gets the main distance done and out of the way
     horizontalDistance = uHeight * oneU   # Distance from U to U (rough est)
