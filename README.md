@@ -32,3 +32,6 @@ Objectives
             if maxBendRadius >= 3:
                 maxBendRadius = 2.5
             maxBendRadius = round(maxBendRadius, 2)
+
+
+I forgot that data classes exist

@@ -1,6 +1,6 @@
-from MathModules import distance_math_function
-from InputModule import input_loop
-from FuzzyMatch import fuzzy_loop
+from .MathModules import distance_math_function
+from .InputModule import input_loop
+from .FuzzyMatch import fuzzy_loop
 
 def initial_startup_script ():
 # A bunch of print statements to start the program in CLI
@@ -86,8 +86,8 @@ def data_input_script (debug, syntax):
         print(f"how many U's is the gap from your patch panel to the network device? (in U's) (1U = 1.75 inches)")
         print(f"   (Examples are; 0, 0.0, 0.00)")
         inputData = {
-                "maxValue": 240,    # Max length before error
-                "minValue": 2.25,   # Min length slack before error
+                "maxValue": 64,    # Max length before error
+                "minValue": 2,     # Min length slack before error
                 "input": f"Height (in rack U) {syntax} "
             }
         uHeight = input_loop(debug, inputData)

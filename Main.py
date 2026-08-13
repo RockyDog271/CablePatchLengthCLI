@@ -1,5 +1,6 @@
 # Local imports
 from Modules.Scripts import initial_startup_script
+from Modules.Scripts import data_input_script
 
 debug = 0
 # [0] = Debug disabled
@@ -11,6 +12,7 @@ syntax = "="
 # Ex: "Question answer here = "
 
 try:
-    initial_startup_script(debug, syntax)
+    initial_startup_script(debug)
+    data_input_script(debug, syntax)
 except:
     if debug == 1 : print("Error100")
