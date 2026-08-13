@@ -1,6 +1,7 @@
 # Local imports
 from Modules.Scripts import initial_startup_script
 from Modules.Scripts import data_input_script
+from Modules.MathModules import cable_length_calc
 
 debug = 0
 # [0] = Debug disabled
@@ -13,6 +14,8 @@ syntax = "="
 
 try:
     initial_startup_script(debug)
-    data_input_script(debug, syntax)
+    minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist = data_input_script(debug, syntax)
+    CBLLN = cable_length_calc (minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist)
+    print(f"CableLength to cut is {CBLLN}")
 except:
     if debug == 1 : print("Error100")
