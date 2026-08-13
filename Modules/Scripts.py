@@ -60,19 +60,13 @@ def data_input_script (debug, syntax):
     # Asks for which mode the user wants to use, EZ or ADV
     print(f"\nWhat is the distance between the 2 ports?")
     print(f'There are 2 ways to measure this distance\nIf you know the distance in inches, enter "EZ"\nIf you do not know the distance, enter "ADV"')
-
-    # Takes the mode input and checks for validity, then moves on (see next section)
-    while True:
-        mode = input(f"\nMode (EZ/ADV) {Syntax} ")                               # Gets the user input
-        mode = mode.lower()                                                      # Takes the input and makes it lowercase
-        matches = get_close_matches(mode, ["ez", "adv"], n = 1, cutoff = 0.45)   # Uses the thing I imported to use fuzzy check for if the input is close to the valid options,
-        if matches:
-            mode = matches[0]                                                    # If the input is close enough to a valid option, it will set the mode to that option
-            if Debug: print(f"Debug message: {mode}")                            # Prints the mode for debugging purposes  (I put this msg cuz it looked wrong without it)
-            break
-        else:
-            print("\nInvalid input. Please enter a valid mode.")
-            print(f'   (Examples are; "EZ, ez", "ADV, adv")')
+    optionListOne = ["ez", "adv"]
+    fuzzyData = {
+        "cutoffValue": 0.45,    # Max strip slack before error
+        "input": f"Mode (EZ/ADV) {syntax} "     
+    }
+    mode = input_loop(debug, fuzzyData, optionListOne)
+    # optionList (ez, adv, etc)
 
     # This has the two menu options, depending on what the user chose, EZ is first.
     if mode == "ez":
@@ -84,62 +78,48 @@ def data_input_script (debug, syntax):
         pointToPointDist = input_loop(debug, inputData)
 
     elif mode == "adv":
-            # Advanced prep msg :3
-            print(f"\nThere are a total of x questions to answer, please answer them as accurately as possible, in the unit requested.")
-            print(f"------------------------------------------------------------------------------------------------------------------")
+        # Advanced prep msg :3
+        print(f"\nThere are a total of x questions to answer, please answer them as accurately as possible, in the unit requested.")
+        print(f"------------------------------------------------------------------------------------------------------------------")
 
-            # The distance between the two devices in U
-            print(f"how many U's is the gap from your patch panel to the network device? (in U's) (1U = 1.75 inches)")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
-            inputData = {
+        # The distance between the two devices in U
+        print(f"how many U's is the gap from your patch panel to the network device? (in U's) (1U = 1.75 inches)")
+        print(f"   (Examples are; 0, 0.0, 0.00)")
+        inputData = {
                 "maxValue": 240,    # Max length before error
                 "minValue": 2.25,   # Min length slack before error
                 "input": f"Height (in rack U) {syntax} "
             }
-            uHeight = input_loop(debug, inputData)
+        uHeight = input_loop(debug, inputData)
 
-            # The position of the port on the patch panel
-            print(f"\nIs the port on your patch panel centered, or is it on the top or bottom of the U? (top/middle/bottom)")
-            while True:
-                patchPortPosition = input(f"\nPlease enter the position of the port (top/middle/bottom) {Syntax} ")
-                patchPortPosition = patchPortPosition.lower()
-                matches = get_close_matches(patchPortPosition, ["top", "middle", "bottom"], n = 1, cutoff = 0.45)
-                if matches:
-                    patchPortPosition = matches[0]
-                    if Debug: print(f"Debug message: {patchPortPosition}")
-                    break
-                else:
-                    print("\nInvalid input. Please enter a valid position.")
-                    print(f'   (Examples are; "top, Top", "middle, Middle", "bottom, Bottom")')
+        # The position of the port on the patch panel
+        print(f"\nIs the port on your patch panel centered, or is it on the top or bottom of the panel? (top/middle/bottom)")
+        optionListTwo = ["bottom", "middle", "top"]
+        fuzzyData = {
+            "cutoffValue": 0.45,
+            "input": f"Port position (top/middle/bottom) {syntax}"   
+        }
+        patchPortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
 
-            # The position of the port on the network device
-            print(f"\nIs the port on your network device centered, or is it on the top or bottom of the U? (top/middle/bottom)")
-            while True:
-                devicePortPosition = input(f"\nPlease enter the position of the port (top/middle/bottom) {Syntax} ")
-                devicePortPosition = devicePortPosition.lower()
-                matches = get_close_matches(devicePortPosition, ["top", "middle", "bottom"], n = 1, cutoff = 0.45)
-                if matches:
-                    devicePortPosition = matches[0]
-                    if Debug: print(f"Debug message: {devicePortPosition}")
-                    break
-                else:
-                    print("\nInvalid input. Please enter a valid position.")
-                    print(f'   (Examples are; "top, Top", "middle, Middle", "bottom, Bottom")')
+        # The position of the port on the network device
+        print(f"\nIs the port on your network device centered, or is it on the top or bottom of the network device? (top/middle/bottom)")
+        optionListTwo = ["bottom", "middle", "top"]
+        fuzzyData = {
+            "cutoffValue": 0.45,
+            "input": f"Port position (top/middle/bottom) {syntax}"
+        }
+        devicePortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
 
-            # Get the left // right distance between the ports
-            print(f"\nWhat is the distance between the ports, left to right? please count the distance by counting how many ports apart the switches,\nwether it is left or right doesn't matter")
-            while True:
-                try:
-                    portDistance = int(input(f"\nPlease enter the distance between the ports (in port count) {Syntax} "))
-                except ValueError:
-                    print("\nInvalid input. Please enter a valid number.")
-                    print(f"   (Examples are; 0, 1, 2, 3, 4, 5, etc.)")
-                pointToPointDist = (uHeight, patchPortPosition, devicePortPosition, portDistance)
-                break
-            break
+        # Get the left // right distance between the ports
+        print(f"\nWhat is the distance between the ports, left to right? please count the distance by counting how many ports apart the switches,\nwether it is left or right doesn't matter")
+        inputData = {
+                "maxValue": 32,    # Max gap before error
+                "minValue": 0  ,   # Min gap before error
+                "input": f"The gap between the network device and patch panel {syntax} "
+            }
+        portDistance = input_loop(debug, inputData)
+        # grab the final calculation for the adv mode
+        pointToPointDist = distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance) # Please note that the scaling now exists INSIDE the function
 
     # Return gathered vars :P
     return minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist
-
-
-

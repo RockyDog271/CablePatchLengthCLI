@@ -1,13 +1,38 @@
-def input_loop(debug):
-    
+class ValueTooHigh(Exception):
+    pass
+class ValueTooLow(Exception):
+    pass
+
+def input_loop(debug, inputData):
     while True:
         try:
-           minBendRadius = round(minBendRadius, 2)
-           if Debug: print(f"Debug message: {minBendRadius}")
-           break 
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
+            # Extracted the values from inputData
+            maxValue = inputData["maxValue"]
+            minValue = inputData["minValue"]
+            outputText = inputData ["input"]
 
-# START \033[34m AND \033[32m
-# END \033[0m
+            # Asks the user for the value
+            numericValue = float(input(f"\033[34m{outputText}\033[0m"))
+
+            # I feel like this is a rare case where the code is self-documenting
+            if numericValue > maxValue:
+                raise ValueTooHigh
+            elif numericValue < minValue:
+                raise ValueTooLow
+            else: # This isn't needed, I may remove in the future but I might try something first
+                numericValue = round(numericValue, 2)
+                break
+
+        # All of the exception checks
+        except ValueError:
+            print("\n\033[31mInvalid input. Please enter a valid number.\033[32m")
+            print(f"   (Examples are; 0, 0.0, 0.00)")
+        except ValueTooHigh:
+            print("\n\033[31mInvalid input. Input is too high!\033[32m")
+            print(f"   (The maximum value allowed is {maxValue}, you entered {numericValue})")
+        except ValueTooLow:
+            print("\n\033[31mInvalid input. Input is too low!\033[32m")
+            print(f"   (The maximum value allowed is {minValue}, you entered {numericValue})")
+        except:
+            pass # the debug call will go here
+    return numericValue # note that this will be any VAR for whatever called this function
