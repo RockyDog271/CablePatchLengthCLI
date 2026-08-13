@@ -1,98 +1,60 @@
-from difflib import get_close_matches # Needed for the fuzzy matching of the mode input
-import math # Needed for the complex math thingies
+from MathModules import distance_math_function
+from InputModule import input_loop
+from FuzzyMatch import fuzzy_loop
 
-def Math(oneU, onePort, topPort, middlePort, lowerPort, uHeight, patchPortPosition, devicePortPosition, portDistance):
-    # This gets the main distance done and out of the way
-    horizontalDistance = uHeight * oneU   # Distance from U to U (rough est)
-
-    # THis gets vertical done and out of the way so I don't have to deal with it more
-    verticalDistance = portDistance * onePort
-
-    # This is used because I did complex stuff and things that could have been cleaner earlier but it is too late :c
-    adjustments = {
-        "bottom": lowerPort,
-        "middle": middlePort,
-        "top": topPort
-    }
-    horizontalDistance -= adjustments[patchPortPosition]                            # This takes the HozDist and subtracts based on the dictionary reference
-    horizontalDistance -= adjustments[devicePortPosition]                           # This takes the HozDist and subtracts based on the dictionary reference
-    pointToPointDist = math.sqrt(verticalDistance**2 + horizontalDistance**2)       # This finds the distance between the 2 points (in inches ofc :3)
-    pointToPointDist = round(pointToPointDist, 2)                                   # Just painting a happy little rounded number :D                              
-    return pointToPointDist
-
-def InitialStartup ():
+def initial_startup_script ():
 # A bunch of print statements to start the program in CLI
     print(f"\n\n")
-    print(f"         ------------------------------------         ")
-    print(f"         ------ \033[32mCable Patch Length CLI\033[0m ------         ")
-    print(f"         ----------  \033[34mBy Rocky :3c\033[0m  ----------         ")
-    print(f"         ------------------------------------         ")
+    print(f"     --------------------------------------------     ")
+    print(f"     ---------- \033[32mCable Patch Length CLI\033[0m ----------     ")
+    print(f"     --------------  \033[34mBy Rocky :3c\033[0m  --------------     ")
+    print(f"     --------------------------------------------     ")
     print(f"\n")
 # START \033[34m AND \033[32m
 # END \033[0m
 
-def QuestionScript ():
-    Syntax = "=" # For what the typing prompt starts with :)
-    Debug = False # For debugging purposes, if you want to see the values of the variables
-
-    # Print and Answers for the basic necessities of the program
-
+def data_input_script (debug, syntax):
     # Gets value for the minimum bend radius of the cable (minBendRadius)
     print(f"\nWhat is the minimum bend radius of the cable? (in inches)?")
     print(f"   (The default suggestion is 1.0(in)")
-    while True:
-        try:
-           minBendRadius = float(input(f"\nMinimum bend radius {Syntax} "))
-           minBendRadius = round(minBendRadius, 2)
-           if Debug: print(f"Debug message: {minBendRadius}")
-           break 
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
+    inputData = {
+        "maxValue": 10,   # Max bend radius before error
+        "minValue": .75,  # Min bend radius before error
+        "input": f"Minimum bend radius {syntax} "
+    }
+    minBendRadius = input_loop(debug, inputData)
 
     # Gets value for the maximum bend radius of the cable (maxBendRadius)
     print(f"\nWhat is the max clearance before the cables conflict with an obstacle? (in inches)?")
-    print(f"   (If you don't know, just type 0")
-    while True:
-        try:
-            maxBendRadius = float(input(f"\nClearance {Syntax} "))
-            if maxBendRadius == 0:
-               maxBendRadius = 30
-            if maxBendRadius >= 3:
-                maxBendRadius = 2.5
-            maxBendRadius = round(maxBendRadius, 2)
-            if Debug: print(f"Debug message: {maxBendRadius}")
-            break
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
+    print(f"   (If you don't know, just type 30")
+    inputData = {
+        "maxValue": 30,   # Max clearance before error
+        "minValue": 1.5,  # Min clearance before error
+        "input": f"Clearance {syntax} "
+    }
+    maxBendRadius = input_loop(debug, inputData)
+
 
     # Gets value for the size of the connectors used (in inches) this is the connectorSize Var
     print(f"\nWhat is the size of the connectors you are using on these patch cables? (in inches pls)")
     print(f"   (Typically connectors with cable relief is 2.0(in) and normal RJ-45 pass-through is 1.0(in)")
-    while True:
-        try:
-           connectorSize = float(input(f"\nPlease enter your connector size {Syntax} "))
-           connectorSize = round(connectorSize, 2)
-           if Debug: print(f"Debug message: {connectorSize}")
-           break 
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
+    inputData = {
+        "maxValue": 5,    # Max connector size before error
+        "minValue": .25,  # Min connector size before error
+        "input": f"Connector length {syntax} "
+    }
+    connectorSize = input_loop(debug, inputData)
+
 
     # Gets value for preferred amount of cutoff slack VAR = slackCutoff
     print(f"\nHow much slack do you cut off when stripping CAT cable in prep for termination?")
     print(f"   (The default suggestion is 2.0(in) of slack")
-    while True:
-        try:
-           slackCutoff = float(input(f"\nPlease enter your preferred slack when terminating CAT cable {Syntax} "))
-           slackCutoff = round(slackCutoff, 2)
-           if Debug: print(f"Debug message: {slackCutoff}")
-           break 
-        except ValueError:
-            print("\nInvalid input. Please enter a valid number.")
-            print(f"   (Examples are; 0, 0.0, 0.00)")
-
+    inputData = {
+        "maxValue": 5,    # Max strip slack before error
+        "minValue": .25,  # Min strip slack before error
+        "input": f"Slack cutoff length {syntax} "
+    }
+    slackCutoff = input_loop(debug, inputData)
 
     # Gets value for the distance between the 2 endpoints (pointToPointDist)
     # Asks for which mode the user wants to use, EZ or ADV
@@ -113,35 +75,28 @@ def QuestionScript ():
             print(f'   (Examples are; "EZ, ez", "ADV, adv")')
 
     # This has the two menu options, depending on what the user chose, EZ is first.
-    while True:
-        if mode == "ez":
-            try:
-                pointToPointDist = float(input(f"\nPlease enter the distance between the 2 ports (in inches) {Syntax} "))
-                pointToPointDist = round(pointToPointDist, 2)
-                if Debug: print(f"Debug message: {pointToPointDist}")
-                break
-            except ValueError:
-                print("\nInvalid input. Please enter a valid number.")
-                print(f"   (Examples are; 0, 0.0, 0.00)") # OwO
-        elif mode == "adv":
-            oneU = 1.75         # This value is the U height of a rack
-            onePort = 0.50      # This value is the rough width of a port
-            topPort = -0.75     # This value is what is subtracted from "oneU" to get the middle point of the top port
-            middlePort = -0.85  # This value is what is subtracted from "oneU" to get the middle point of the middle port
-            lowerPort = 1.25    # This value is what is subtracted from "oneU" to get the middle point of the bottom port
+    if mode == "ez":
+        inputData = {
+            "maxValue": 240,    # Max length before error
+            "minValue": 2.25,   # Min length slack before error
+            "input": f"Distance between the (2) points (in inches) {syntax} "
+        }
+        pointToPointDist = input_loop(debug, inputData)
 
-            # The distance in U
+    elif mode == "adv":
+            # Advanced prep msg :3
             print(f"\nThere are a total of x questions to answer, please answer them as accurately as possible, in the unit requested.")
             print(f"------------------------------------------------------------------------------------------------------------------")
+
+            # The distance between the two devices in U
             print(f"how many U's is the gap from your patch panel to the network device? (in U's) (1U = 1.75 inches)")
             print(f"   (Examples are; 0, 0.0, 0.00)")
-            while True:
-                try:
-                    uHeight = float(input(f"\nPlease enter the height in U's {Syntax} "))
-                    break
-                except ValueError:
-                    print("\nInvalid input. Please enter a valid number.")
-                    print(f"   (Examples are; 0, 0.0, 0.00)")
+            inputData = {
+                "maxValue": 240,    # Max length before error
+                "minValue": 2.25,   # Min length slack before error
+                "input": f"Height (in rack U) {syntax} "
+            }
+            uHeight = input_loop(debug, inputData)
 
             # The position of the port on the patch panel
             print(f"\nIs the port on your patch panel centered, or is it on the top or bottom of the U? (top/middle/bottom)")
@@ -179,7 +134,7 @@ def QuestionScript ():
                 except ValueError:
                     print("\nInvalid input. Please enter a valid number.")
                     print(f"   (Examples are; 0, 1, 2, 3, 4, 5, etc.)")
-                pointToPointDist = Math(oneU, onePort, topPort, middlePort, lowerPort, uHeight, patchPortPosition, devicePortPosition, portDistance)
+                pointToPointDist = (uHeight, patchPortPosition, devicePortPosition, portDistance)
                 break
             break
 
@@ -187,18 +142,4 @@ def QuestionScript ():
     return minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist
 
 
-def CableLengthCalc (minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist):
-    if minBendRadius < 1.5:
-        maxBendRadius = maxBendRadius + 1.5
-    cableLength = connectorSize * 2                # Takes the connector size and *2 (for each side)
-    cableLength = cableLength - (0.25 * 2)         # Subtracts the .25 that the cable doesn't pull through the connector (for each side)
-    cableLength = cableLength + pointToPointDist   # Adds the main length factor
-    cableLength = cableLength + (maxBendRadius//3) # This works good for me when it comes to adding bend
-    cableLength = cableLength + (slackCutoff * 2)  # adding the slack cutoff for both ends of the cable
-    cableLength = "{:.2f}".format(cableLength)
-    return cableLength
-
- 
-
-# connector + connector -.25 -.25 (since connector doesnt have cable go all the way through) + cutpoint (length of slack) + distancepoint to point, and then + (bend // 3)
 

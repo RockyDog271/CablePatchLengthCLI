@@ -1,33 +1,16 @@
-# import os
-
 # Local imports
-from Modules.Scripts import InitialStartup as SetupScript
-from Modules.Scripts import QuestionScript
-from Modules.Scripts import CableLengthCalc
+from Modules.Scripts import initial_startup_script
 
-# Name of Script and other things
+debug = 0
+# [0] = Debug disabled
+# [1] = Basic Debug enabled (Unique Errors and Value prints only)
+# [2] = Adv Debug enabled (Prints the exceptions as well as the basic Debug output)
+
+syntax = "="
+# Common options are "=" ">>" and ":"
+# Ex: "Question answer here = "
+
 try:
-    SetupScript()
+    initial_startup_script(debug, syntax)
 except:
-    print("Error231: Something went wrong!")
-
-while True:
-    try:
-        minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist = QuestionScript()
-    except:
-        print("Error232: Something went wrong!")
-    try:
-        cableSize = CableLengthCalc(minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist)
-    except:
-        print("Error233: Something went wrong!")
-
-    print(f"\nFor your patch cables, you should cut {cableSize} inches of cable!^^")
-
-    # I have to go to work in like 10m so I have to finish this fast 
-    RRS = input(f"\nWould you like to calc another cable? (Y/N)")
-    if RRS == "Y":
-        pass
-    if RRS == "N":
-        break
-    else:
-        break
+    if debug == 1 : print("Error100")
