@@ -1,14 +1,15 @@
 from difflib import get_close_matches # Needed for the fuzzy matching of the mode input
 
 def fuzzy_loop(debug, fuzzyData, optionList):
+    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
     fuzzAmount = fuzzyData["cutoffValue"]
     outputText = fuzzyData["input"]
 
     while True:
         # Asks the user for the value
-        charValue = float(input(f"\033[34m{outputText}\033[0m")) # also maybe name the VAR fuzzyValue ?
+        charValue = input(f"\033[34m{outputText}\033[0m") # also maybe name the VAR fuzzyValue ?
         charValue = charValue.lower()
-        matches = get_close_matches(charValue, [optionList], n = 1, cutoff = fuzzAmount) 
+        matches = get_close_matches(charValue, optionList, n = 1, cutoff = fuzzAmount) 
 
         if matches:
             charValue = matches[0]

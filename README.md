@@ -1,37 +1,26 @@
 # CablePatchLengthCLI
+A Python command-line tool designed to calculate the recommended cut length for Ethernet patch cables based on the distance between the connected devices, connector size, bend radius, and preferred termination slack.
 
-Objectives
+## Features
+> Calculate cable length using a simple measurement ("EZ" mode)
+> Calculate port-to-port distance using rack and port measurements ("ADV" mode)
+> Fuzzy matching for text-based options
+> Input validation with minimum and maximum values
+> Modular Python structure
+> Rounded calculations to two decimal places
 
-> Add debug options to main and pass them to modules
-> add adv and simple debuf modes, one to print exceptions and one just for mine
+The program calculates the recommended cable length using several measurements:
+> Minimum cable bend radius
+> Maximum clearance around obstacles
+> Connector length
+> Termination slack
+> Port-to-port distance
 
-> add a unit test or 2
+## V0.3 Planned Features
+Advanced and Basic DEBUG options in Main
+At least one if not more unit tests
+Bugfix of the "maxbendradius" having too much effect on the cable length when more then 6"
 
-
-> replace "math" with something more descriptive
-
-> fix bug in portExcept
-
-> remove whileTRUE around ez/adv mode selector
-
-> add menu options at start
-
-> fix unprofessial part at end of main
-
-> create reusable input function
-
-> create reusable fuzzy match function
-
-> dont change number to strung, keep it a float (end def)
-
-> add input validation (input too low, input too high)
-
-
-            if maxBendRadius == 0:
-               maxBendRadius = 30
-            if maxBendRadius >= 3:
-                maxBendRadius = 2.5
-            maxBendRadius = round(maxBendRadius, 2)
-
-
-I forgot that data classes exist
+## V0.4 Planned Features
+menu options at the start of the program
+I forgot that classes exist so changing the dictionary's being used to classes instead

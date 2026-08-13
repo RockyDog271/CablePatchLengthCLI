@@ -17,5 +17,6 @@ try:
     minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist = data_input_script(debug, syntax)
     CBLLN = cable_length_calc (minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist)
     print(f"CableLength to cut is {CBLLN}")
-except:
+except Exception as e:
+    print(f"DEBUG EXCEPTION: {type(e).__name__}: {e}")
     if debug == 1 : print("Error100")

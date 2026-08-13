@@ -2,7 +2,8 @@ from .MathModules import distance_math_function
 from .InputModule import input_loop
 from .FuzzyMatch import fuzzy_loop
 
-def initial_startup_script ():
+def initial_startup_script (debug):
+    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
 # A bunch of print statements to start the program in CLI
     print(f"\n\n")
     print(f"     --------------------------------------------     ")
@@ -14,6 +15,8 @@ def initial_startup_script ():
 # END \033[0m
 
 def data_input_script (debug, syntax):
+    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
+
     # Gets value for the minimum bend radius of the cable (minBendRadius)
     print(f"\nWhat is the minimum bend radius of the cable? (in inches)?")
     print(f"   (The default suggestion is 1.0(in)")
@@ -65,7 +68,7 @@ def data_input_script (debug, syntax):
         "cutoffValue": 0.45,    # Max strip slack before error
         "input": f"Mode (EZ/ADV) {syntax} "     
     }
-    mode = input_loop(debug, fuzzyData, optionListOne)
+    mode = fuzzy_loop(debug, fuzzyData, optionListOne)
     # optionList (ez, adv, etc)
 
     # This has the two menu options, depending on what the user chose, EZ is first.

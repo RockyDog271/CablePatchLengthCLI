@@ -4,6 +4,8 @@ class ValueTooLow(Exception):
     pass
 
 def input_loop(debug, inputData):
+    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
+    
     while True:
         try:
             # Extracted the values from inputData
