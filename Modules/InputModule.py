@@ -5,7 +5,7 @@ class ValueTooLow(Exception):
 
 def input_loop(debug, inputData):
     debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
-    
+
     while True:
         try:
             # Extracted the values from inputData
@@ -34,7 +34,7 @@ def input_loop(debug, inputData):
             print(f"   (The maximum value allowed is {maxValue}, you entered {numericValue})")
         except ValueTooLow:
             print("\n\033[31mInvalid input. Input is too low!\033[32m")
-            print(f"   (The maximum value allowed is {minValue}, you entered {numericValue})")
+            print(f"   (The minimum value allowed is {minValue}, you entered {numericValue})")
         except:
             pass # the debug call will go here
     return numericValue # note that this will be any VAR for whatever called this function
