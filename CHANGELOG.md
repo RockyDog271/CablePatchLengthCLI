@@ -1,4 +1,7 @@
 
+# V0.3
+    
+
 # V0.2
     Refactored the code-base
 
@@ -8,3 +11,4 @@
     ADDED unit test placeholder for future smoother code testing
 
 # V0.1
+    START OF PROJECT

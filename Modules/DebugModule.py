@@ -14,12 +14,14 @@ def debug_loop(debug, valuePrintout, valueText, exception, traceback):
     if debug == 1:
         debug_loop_basic(valuePrintout, valueText, traceback)
     if debug == 2:
+        debug_loop_adv(exception, traceback)
+    if debug == 3:
         debug_loop_basic(valuePrintout, valueText, traceback)
         debug_loop_adv(exception, traceback)
 
 # if debug basic then;
 # if debug > 0: debug_loop(debug, ) 
 
-# if debug adv then;
+# if debug adv, or adv + basic then;
 # 
 # if debug > 0: debug_loop() 
