@@ -1,27 +1,22 @@
-def debug_loop(debug, valuePrintout, valueText, exception, traceback):
-    def debug_loop_basic(valuePrintout, valueText):
-        print(f"\n\033[31mDEBUG PRINTOUT, the value of {valueText} is {valuePrintout}\033[32m")
-        print(f"Traceback: ERROR{traceback}\n")
-        # valuePrintout should be the variable, and valueText should be the variable name ("var_name")
+import traceback
 
-    def debug_loop_adv(exception):
+def debug_printout(debug, valueName, valuePrintout):
+    if debug in (1, 3):
+        print(f"\n\033[31mDEBUG PRINTOUT, the value of {valueName} is {valuePrintout}\033[32m")
+# debug_printout(debug, "VAR NAME HERE", numericValue)
+
+def debug_exception(debug, exception):
+    if debug in (2, 3):
         print(f"\n\033[31mDEBUG PRINTOUT, Exception printout: {exception}\033[32m\n")
-        print(f"Traceback: ERROR{traceback}\n")
-        # when an exception occurs, the valuePrintout should be (exception as var), so the exception gets printed
+        traceback.print_exc()
+# debug_exception(debug, exception)
 
-    if debug == 0:
-        pass # It seems like this should be here just in case but I am unsure why
-    if debug == 1:
-        debug_loop_basic(valuePrintout, valueText, traceback)
-    if debug == 2:
-        debug_loop_adv(exception, traceback)
-    if debug == 3:
-        debug_loop_basic(valuePrintout, valueText, traceback)
-        debug_loop_adv(exception, traceback)
-
-# if debug basic then;
-# if debug > 0: debug_loop(debug, ) 
-
-# if debug adv, or adv + basic then;
-# 
-# if debug > 0: debug_loop() 
+def debug_value_printout(debug, inputData):
+    if debug in (1, 3):
+        # Extracted the values from inputData
+        maxValue = inputData["maxValue"]
+        minValue = inputData["minValue"]
+        print(f"\n\033[31mDEBUG PRINTOUT, the MIN value listed is {minValue}\033[32m")
+        print(f"\n\033[31mDEBUG PRINTOUT, the MAX value listed is {maxValue}\033[32m")
+# except Exception as exception
+# debug_value_printout(debug, inputData)

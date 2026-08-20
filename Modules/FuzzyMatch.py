@@ -1,4 +1,5 @@
 from difflib import get_close_matches # Needed for the fuzzy matching of the mode input
+from .DebugModule import * 
 
 def fuzzy_loop(debug, fuzzyData, optionList):
     debug = debug # TEMPORARY UNTIL DEBUG IS ADDED

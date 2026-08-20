@@ -8,6 +8,8 @@ A Python command-line tool designed to calculate the recommended cut length for 
 > Input validation with minimum and maximum values  
 > Modular Python structure  
 > Rounded calculations to two decimal places  
+> Basic - Advance debug printout and traceback options
+> Unit tests for development assistance
 
 The program calculates the recommended cable length using several measurements:  
 > Minimum cable bend radius  
@@ -15,10 +17,6 @@ The program calculates the recommended cable length using several measurements:
 > Connector length  
 > Termination slack  
 > Port-to-port distance  
-
-## V0.3 Planned Features  
-Advanced and Basic DEBUG options in Main  
-At least one if not more unit tests  
 
 ## V0.4 Planned Features  
 menu options at the start of the program  
@@ -29,10 +27,10 @@ add support for proper scripting
 ## V0.5 Planned Features
 add black/flake/pylint
 consider changing everything to snake-case
-add requirment-dev.txt
 change Hardcoded ANSI to colorama
 add ability to automate scripts
 add docstrings / type hints
 
 ## V0.6 Planned Features
 Bugfix of the "maxbendradius" having too much effect on the cable length when more then 6"  
+Bugfix of max bend radius prompt should actually be a max clearence prompt for clarity

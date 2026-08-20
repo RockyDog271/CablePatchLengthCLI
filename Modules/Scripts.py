@@ -1,22 +1,21 @@
 from .MathModules import distance_math_function
 from .InputModule import input_loop
 from .FuzzyMatch import fuzzy_loop
+from .DebugModule import * 
 
 def initial_startup_script (debug):
     debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
 # A bunch of print statements to start the program in CLI
     print(f"\n\n")
     print(f"     --------------------------------------------     ")
-    print(f"     ------------ \033[32mCable Patch Length CLI\033[0m ------------     ")
-    print(f"     ----------------  \033[34mBy Rocky :3c\033[0m  ----------------     ")
+    print(f"     ------------ \033[32mCable Patch Length CLI\033[0m --------------     ")
+    print(f"   ------------------  \033[34mBy Rocky :3c\033[0m  ----------------     ")
     print(f"     --------------------------------------------     ")
     print(f"\n")
 # START \033[34m AND \033[32m
 # END \033[0m
 
 def data_input_script (debug, syntax):
-    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
-
     # Gets value for the minimum bend radius of the cable (minBendRadius)
     print(f"\nWhat is the minimum bend radius of the cable? (in inches)?")
     print(f"   (The default suggestion is 1.0(in) )")
@@ -25,7 +24,9 @@ def data_input_script (debug, syntax):
         "minValue": .75,  # Min bend radius before error
         "input": f"Minimum bend radius {syntax} "
     }
+    debug_value_printout(debug, inputData)
     minBendRadius = input_loop(debug, inputData)
+    debug_printout(debug, "minBendRadius", minBendRadius)
 
     # Gets value for the maximum bend radius of the cable (maxBendRadius)
     print(f"\nWhat is the max clearance before the cables conflict with an obstacle? (in inches)?")
@@ -35,8 +36,9 @@ def data_input_script (debug, syntax):
         "minValue": 1.5,  # Min clearance before error
         "input": f"Clearance {syntax} "
     }
+    debug_value_printout(debug, inputData)
     maxBendRadius = input_loop(debug, inputData)
-
+    debug_printout(debug, "maxBendRadius", maxBendRadius)
 
     # Gets value for the size of the connectors used (in inches) this is the connectorSize Var
     print(f"\nWhat is the size of the connectors you are using on these patch cables? (in inches pls)")
@@ -46,8 +48,9 @@ def data_input_script (debug, syntax):
         "minValue": .25,  # Min connector size before error
         "input": f"Connector length {syntax} "
     }
+    debug_value_printout(debug, inputData)
     connectorSize = input_loop(debug, inputData)
-
+    debug_printout(debug, "connectorSize", connectorSize)
 
     # Gets value for preferred amount of cutoff slack VAR = slackCutoff
     print(f"\nHow much slack do you cut off when stripping CAT cable in prep for termination?")
@@ -57,7 +60,9 @@ def data_input_script (debug, syntax):
         "minValue": .25,  # Min strip slack before error
         "input": f"Slack cutoff length {syntax} "
     }
+    debug_value_printout(debug, inputData)
     slackCutoff = input_loop(debug, inputData)
+    debug_printout(debug, "slackCutoff", slackCutoff)
 
     # Gets value for the distance between the 2 endpoints (pointToPointDist)
     # Asks for which mode the user wants to use, EZ or ADV
@@ -69,6 +74,7 @@ def data_input_script (debug, syntax):
         "input": f"Mode (EZ/ADV) {syntax} "     
     }
     mode = fuzzy_loop(debug, fuzzyData, optionListOne)
+    debug_printout(debug, "mode", mode)
     # optionList (ez, adv, etc)
 
     # This has the two menu options, depending on what the user chose, EZ is first.
@@ -79,6 +85,7 @@ def data_input_script (debug, syntax):
             "input": f"Distance between the (2) points (in inches) {syntax} "
         }
         pointToPointDist = input_loop(debug, inputData)
+        debug_printout(debug, "pointToPointDist", pointToPointDist)
 
     elif mode == "adv":
         # Advanced prep msg :3
@@ -94,6 +101,7 @@ def data_input_script (debug, syntax):
                 "input": f"Height (in rack U) {syntax} "
             }
         uHeight = input_loop(debug, inputData)
+        debug_printout(debug, "uHeight", uHeight)
 
         # The position of the port on the patch panel
         print(f"\nIs the port on your patch panel centered, or is it on the top or bottom of the panel? (top/middle/bottom)")
@@ -103,6 +111,7 @@ def data_input_script (debug, syntax):
             "input": f"Port position (top/middle/bottom) {syntax} "   
         }
         patchPortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
+        debug_printout(debug, "patchPortPosition", patchPortPosition)
 
         # The position of the port on the network device
         print(f"\nIs the port on your network device centered, or is it on the top or bottom of the network device? (top/middle/bottom)")
@@ -112,6 +121,7 @@ def data_input_script (debug, syntax):
             "input": f"Port position (top/middle/bottom) {syntax} "
         }
         devicePortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
+        debug_printout(debug, "devicePortPosition", devicePortPosition)
 
         # Get the left // right distance between the ports
         print(f"\nWhat is the distance between the ports, left to right? please count the distance by counting how many ports apart the switches,\nwether it is left or right doesn't matter")
@@ -120,9 +130,11 @@ def data_input_script (debug, syntax):
                 "minValue": 0  ,   # Min gap before error
                 "input": f"The gap between the network device and patch panel {syntax} "
             }
+        debug_value_printout(debug, inputData)
         portDistance = input_loop(debug, inputData)
+        debug_printout(debug, "portDistance", portDistance)
         # grab the final calculation for the adv mode
-        pointToPointDist = distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance) # Please note that the scaling now exists INSIDE the function
+        pointToPointDist = distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance, debug) # Please note that the scaling now exists INSIDE the function
 
     # Return gathered vars :P
     return minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist
