@@ -4,7 +4,6 @@ from .FuzzyMatch import fuzzy_loop
 from .DebugModule import * 
 
 def initial_startup_script (debug):
-    debug = debug # TEMPORARY UNTIL DEBUG IS ADDED
 # A bunch of print statements to start the program in CLI
     print(f"\n\n")
     print(f"     --------------------------------------------     ")

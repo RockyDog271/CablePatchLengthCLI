@@ -32,5 +32,8 @@ add ability to automate scripts
 add docstrings / type hints
 
 ## V0.6 Planned Features
+
+## Known Bugs
 Bugfix of the "maxbendradius" having too much effect on the cable length when more then 6"  
 Bugfix of max bend radius prompt should actually be a max clearence prompt for clarity
+Bugfix of patchportposition and deviceportposition should actually be top device/patchpanel and bottom device/patchpanel
