@@ -1,17 +1,20 @@
+from .DebugModule import * 
 import math
 
-def distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance):
+def distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance, debug):
     oneU = 1.75         # This value is the U height of a rack
-    onePort = 0.50      # This value is the rough width of a port
-    topPort = -0.75     # This value is what is subtracted from "oneU" to get the middle point of the top port
-    middlePort = -0.85  # This value is what is subtracted from "oneU" to get the middle point of the middle port
-    lowerPort = 1.25    # This value is what is subtracted from "oneU" to get the middle point of the bottom port
+    onePort = 0.50      # This value is the rough width of a port (measure from 3 patch panels and AVG'd)
+    topPort = -0.75     # This value is what is subtracted from "oneU" to get the middle point of the top port (measured from a Cisco2960)
+    middlePort = -0.85  # This value is what is subtracted from "oneU" to get the middle point of the middle port (measured from a CiscoASA)
+    lowerPort = 1.25    # This value is what is subtracted from "oneU" to get the middle point of the bottom port (measured from a Cisco2960)
 
     # This gets the main distance done and out of the way
     horizontalDistance = uHeight * oneU   # Distance from U to U (rough est)
+    debug_printout(debug, "horizontalDistance", horizontalDistance)
 
     # THis gets vertical done and out of the way so I don't have to deal with it more
     verticalDistance = portDistance * onePort
+    debug_printout(debug, "verticalDistance", verticalDistance)
 
     # This is used because I did complex stuff and things that could have been cleaner earlier but it is too late :c
     adjustments = {
