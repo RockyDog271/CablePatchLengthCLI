@@ -91,7 +91,7 @@ class TestCableLengthCalc:
         )
         assert result == 16.5
 
-# Unit tests for the "distance)math_function" are inside of this class
+# Unit tests for the "distance_math_function" are inside of this class
 class TestDistanceMathFunction:
     # The expected inputs within expected ranged
     def test_distance_math_function_normal(self, capsys):

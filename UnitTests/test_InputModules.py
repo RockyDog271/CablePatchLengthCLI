@@ -3,7 +3,125 @@ from Modules.InputModule import input_loop
 
 # Unit tests for the "input_loop" are inside of this class
 class TestInputLoop:
-    pass
+    # This tests the normal input
+    def test_input_loop_normal(self, monkeypatch):
+        monkeypatch.setattr("builtins.input", lambda _: "5")
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 10,
+                "minValue": 1,
+                "input": "Value"
+            }
+        )
+        assert result == 5
+
+    # This tests for decimal handling
+    def test_input_loop_decimal_check(self, monkeypatch):
+        monkeypatch.setattr("builtins.input", lambda _: "5.506")
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 10,
+                "minValue": 1,
+                "input": "Value"
+            }
+        )
+        assert result == 5.51
+
+    # This tests the rounding, ensuring it works correctly
+    def test_input_loop_rounding_check(self, monkeypatch):
+        monkeypatch.setattr("builtins.input", lambda _: "5.5067888")
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 10,
+                "minValue": 1,
+                "input": "Value"
+            }
+        )
+        assert result == 5.51
+
+    # This tests the function when the value is too high
+    def test_input_loop_high(self, monkeypatch, capsys):
+        inputs = iter(["21", "19"])
+        monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 20,
+                "minValue": 10,
+                "input": "Value"
+            }
+        )
+        captured = capsys.readouterr()
+        assert "Invalid input" in captured.out
+        assert "too high" in captured.out
+        assert "20" in captured.out
+        assert "21" in captured.out
+        assert result == 19
+
+    # This tests the function when the value is too low
+    def test_input_loop_low(self, monkeypatch, capsys):
+        inputs = iter(["3", "10"])
+        monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 20,
+                "minValue": 5,
+                "input": "Value"
+            }
+        )
+        captured = capsys.readouterr()
+        assert "Invalid input" in captured.out
+        assert "too low" in captured.out
+        assert "3" in captured.out
+        assert "5" in captured.out
+        assert result == 10
+
+    # This tests the function when invalid data is passed
+    def test_input_loop_invalid(self, monkeypatch, capsys):
+        inputs = iter(["AE", "19"])
+        monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 20,
+                "minValue": 10,
+                "input": "Value"
+            }
+        )
+        captured = capsys.readouterr()
+        assert "Invalid input" in captured.out
+        assert result == 19
+
+    # This tests the exact MAX VAL
+    def test_input_loop_max(self, monkeypatch):
+        monkeypatch.setattr("builtins.input", lambda _: "30")
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 30,
+                "minValue": 10,
+                "input": "Value"
+            }
+        )
+        assert result == 30
+
+    # This tests the exact MIN VAL
+    def test_input_loop_min(self, monkeypatch):
+        monkeypatch.setattr("builtins.input", lambda _: "10")
+        result = input_loop(
+            debug = 0,
+            inputData = {
+                "maxValue": 20,
+                "minValue": 10,
+                "input": "Value"
+            }
+        )
+        assert result == 10
+
 
 # Unit tests for the "fuzzy_loop" are inside of this class
 class TestFuzzyLoop:
@@ -45,7 +163,7 @@ class TestFuzzyLoop:
         inputs = iter(["advv", "adv"])
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = fuzzy_loop(
-            debug=0,
+            debug = 0,
             optionList=["ez", "adv"],
             fuzzyData={
                 "cutoffValue": 1.00,
@@ -70,3 +188,4 @@ class TestFuzzyLoop:
             }
         )
         assert result == "centralized"
+ 
