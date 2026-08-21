@@ -91,6 +91,17 @@ class TestCableLengthCalc:
         )
         assert result == 16.5
 
+    # A minimum bend radius of exactly 1.5 should not receive the small-radius adjustment
+    def test_cable_length_bend_radius_threshold(self):
+        result = cable_length_calc(
+            minBendRadius = 1.5,
+            maxBendRadius = 6,
+            connectorSize = 1,
+            slackCutoff = 0,
+            pointToPointDist = 0
+        )
+        assert result == 3.5
+
 # Unit tests for the "distance_math_function" are inside of this class
 class TestDistanceMathFunction:
     # The expected inputs within expected ranged
@@ -155,3 +166,14 @@ class TestDistanceMathFunction:
         assert "8.0" in captured.out                # Ensure debug printed the correct value of the variable
 
         assert result == 73.44                      # The output of the function
+
+    # A zero-height rack still has distance between two top ports because of their offsets
+    def test_distance_math_function_zero_height_top_ports(self):
+        result = distance_math_function(
+            uHeight = 0,
+            patchPortPosition = "top",
+            devicePortPosition = "top",
+            portDistance = 0,
+            debug = 0
+        )
+        assert result == 1.5

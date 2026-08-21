@@ -188,4 +188,19 @@ class TestFuzzyLoop:
             }
         )
         assert result == "centralized"
- 
+
+    # An empty response should be rejected and allow the user to try again
+    def test_fuzzy_loop_empty_input(self, monkeypatch, capsys):
+        inputs = iter(["", "adv"])
+        monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+        result = fuzzy_loop(
+            debug = 0,
+            optionList = ["ez", "adv"],
+            fuzzyData = {
+                "cutoffValue": 0.45,
+                "input": "Mode"
+            }
+        )
+        captured = capsys.readouterr()
+        assert "Invalid input" in captured.out
+        assert result == "adv"
