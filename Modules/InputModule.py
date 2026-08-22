@@ -1,4 +1,4 @@
-from .DebugModule import * 
+from .DebugModule import debug_exception
 
 class ValueTooHigh(Exception):
     pass

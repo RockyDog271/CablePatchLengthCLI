@@ -1,7 +1,9 @@
 from .MathModules import distance_math_function
 from .InputModule import input_loop
 from .FuzzyMatch import fuzzy_loop
-from .DebugModule import * 
+from .DebugModule import debug_value_printout
+from .DebugModule import debug_exception
+from .DebugModule import debug_printout
 
 def initial_startup_script (debug):
 # A bunch of print statements to start the program in CLI

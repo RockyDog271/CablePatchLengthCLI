@@ -1,5 +1,7 @@
 from difflib import get_close_matches # Needed for the fuzzy matching of the mode input
-from .DebugModule import * 
+# from .DebugModule import debug_value_printout
+# from .DebugModule import debug_exception
+# from .DebugModule import debug_printout
 
 def fuzzy_loop(debug, fuzzy_data, option_list):
     fuzz_amount = fuzzy_data["cutoffValue"]

@@ -1,4 +1,4 @@
-from .DebugModule import * 
+from .DebugModule import debug_printout
 import math
 
 def distance_math_function(u_height, patch_port_position, device_port_position, port_distance, debug):

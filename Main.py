@@ -2,7 +2,8 @@
 from Modules.Scripts import initial_startup_script
 from Modules.Scripts import data_input_script
 from Modules.MathModules import cable_length_calc
-from Modules.DebugModule import * # This includes "debug_printout", "debug_exception", & "debug_value_exception"
+from Modules.DebugModule import debug_exception
+from Modules.DebugModule import debug_printout
 # debug_printout(debug, "VAR NAME HERE", numericValue)
 # ----------------------------------------
 # debug_value_printout(debug, inputData)
