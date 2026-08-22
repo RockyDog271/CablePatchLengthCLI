@@ -15,76 +15,76 @@ def initial_startup_script (debug):
 # END \033[0m
 
 def data_input_script (debug, syntax):
-    # Gets value for the minimum bend radius of the cable (minBendRadius)
+    # Gets value for the minimum bend radius of the cable (min_bend_radius)
     print(f"\nWhat is the minimum bend radius of the cable? (in inches)?")
     print(f"   (The default suggestion is 1.0(in) )")
-    inputData = {
-        "maxValue": 10,   # Max bend radius before error
-        "minValue": .75,  # Min bend radius before error
+    input_data = {
+        "max_value": 10,   # Max bend radius before error
+        "min_value": .75,  # Min bend radius before error
         "input": f"Minimum bend radius {syntax} "
     }
-    debug_value_printout(debug, inputData)
-    minBendRadius = input_loop(debug, inputData)
-    debug_printout(debug, "minBendRadius", minBendRadius)
+    debug_value_printout(debug, input_data)
+    min_bend_radius = input_loop(debug, input_data)
+    debug_printout(debug, "min_bend_radius", min_bend_radius)
 
-    # Gets value for the maximum bend radius of the cable (maxBendRadius)
+    # Gets value for the maximum bend radius of the cable (max_bend_radius)
     print(f"\nWhat is the max clearance before the cables conflict with an obstacle? (in inches)?")
     print(f"   (If you don't know, just type thirty (30) )")
-    inputData = {
-        "maxValue": 30,   # Max clearance before error
-        "minValue": 1.5,  # Min clearance before error
+    input_data = {
+        "max_value": 30,   # Max clearance before error
+        "min_value": 1.5,  # Min clearance before error
         "input": f"Clearance {syntax} "
     }
-    debug_value_printout(debug, inputData)
-    maxBendRadius = input_loop(debug, inputData)
-    debug_printout(debug, "maxBendRadius", maxBendRadius)
+    debug_value_printout(debug, input_data)
+    max_bend_radius = input_loop(debug, input_data)
+    debug_printout(debug, "max_bend_radius", max_bend_radius)
 
-    # Gets value for the size of the connectors used (in inches) this is the connectorSize Var
+    # Gets value for the size of the connectors used (in inches) this is the connector_size Var
     print(f"\nWhat is the size of the connectors you are using on these patch cables? (in inches pls)")
     print(f"   (Typically connectors with cable relief is 2.0(in) and normal RJ-45 pass-through is 1.0(in) )")
-    inputData = {
-        "maxValue": 5,    # Max connector size before error
-        "minValue": .25,  # Min connector size before error
+    input_data = {
+        "max_value": 5,    # Max connector size before error
+        "min_value": .25,  # Min connector size before error
         "input": f"Connector length {syntax} "
     }
-    debug_value_printout(debug, inputData)
-    connectorSize = input_loop(debug, inputData)
-    debug_printout(debug, "connectorSize", connectorSize)
+    debug_value_printout(debug, input_data)
+    connector_size = input_loop(debug, input_data)
+    debug_printout(debug, "connector_size", connector_size)
 
-    # Gets value for preferred amount of cutoff slack VAR = slackCutoff
+    # Gets value for preferred amount of cutoff slack VAR = slack_cutoff
     print(f"\nHow much slack do you cut off when stripping CAT cable in prep for termination?")
     print(f"   (The default suggestion is 2.0(in) of slack)")
-    inputData = {
-        "maxValue": 5,    # Max strip slack before error
-        "minValue": .25,  # Min strip slack before error
+    input_data = {
+        "max_value": 5,    # Max strip slack before error
+        "min_value": .25,  # Min strip slack before error
         "input": f"Slack cutoff length {syntax} "
     }
-    debug_value_printout(debug, inputData)
-    slackCutoff = input_loop(debug, inputData)
-    debug_printout(debug, "slackCutoff", slackCutoff)
+    debug_value_printout(debug, input_data)
+    slack_cutoff = input_loop(debug, input_data)
+    debug_printout(debug, "slack_cutoff", slack_cutoff)
 
-    # Gets value for the distance between the 2 endpoints (pointToPointDist)
+    # Gets value for the distance between the 2 endpoints (point_to_point_dist)
     # Asks for which mode the user wants to use, EZ or ADV
     print(f"\nWhat is the distance between the 2 ports?")
     print(f'There are two (2) ways to measure this distance\nIf you know the distance in inches, enter "EZ"\nIf you do not know the distance, enter "ADV"')
-    optionListOne = ["ez", "adv"]
-    fuzzyData = {
-        "cutoffValue": 0.45,
+    option_list = ["ez", "adv"]
+    fuzzy_data = {
+        "cutoff_value": 0.45,
         "input": f"Mode (EZ/ADV) {syntax} "     
     }
-    mode = fuzzy_loop(debug, fuzzyData, optionListOne)
+    mode = fuzzy_loop(debug, fuzzy_data, option_list)
     debug_printout(debug, "mode", mode)
-    # optionList (ez, adv, etc)
+    # option_list (ez, adv, etc)
 
     # This has the two menu options, depending on what the user chose, EZ is first.
     if mode == "ez":
-        inputData = {
-            "maxValue": 240,    # Max length before error
-            "minValue": 2.25,   # Min length slack before error
+        input_data = {
+            "max_value": 240,    # Max length before error
+            "min_value": 2.25,   # Min length slack before error
             "input": f"Distance between the (2) points (in inches) {syntax} "
         }
-        pointToPointDist = input_loop(debug, inputData)
-        debug_printout(debug, "pointToPointDist", pointToPointDist)
+        point_to_point_dist = input_loop(debug, input_data)
+        debug_printout(debug, "point_to_point_dist", point_to_point_dist)
 
     elif mode == "adv":
         # Advanced prep msg :3
@@ -94,46 +94,46 @@ def data_input_script (debug, syntax):
         # The distance between the two devices in U
         print(f"how many U's is the gap from your patch panel to the network device? (in U's) (1U = 1.75 inches)")
         print(f"   (This includes the U of the patch, if the devices are stacked on each-other that is 2U)")
-        inputData = {
-                "maxValue": 64,    # Max length before error
-                "minValue": 2,     # Min length slack before error
+        input_data = {
+                "max_value": 64,    # Max length before error
+                "min_value": 2,     # Min length slack before error
                 "input": f"Height (in rack U) {syntax} "
             }
-        uHeight = input_loop(debug, inputData)
-        debug_printout(debug, "uHeight", uHeight)
+        u_height = input_loop(debug, input_data)
+        debug_printout(debug, "u_height", u_height)
 
         # The position of the port on the patch panel
         print(f"\nIs the port on your patch panel centered, or is it on the top or bottom of the panel? (top/middle/bottom)")
-        optionListTwo = ["bottom", "middle", "top"]
-        fuzzyData = {
-            "cutoffValue": 0.45,
+        option_list = ["bottom", "middle", "top"]
+        fuzzy_data = {
+            "cutoff_value": 0.45,
             "input": f"Port position (top/middle/bottom) {syntax} "   
         }
-        patchPortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
-        debug_printout(debug, "patchPortPosition", patchPortPosition)
+        patch_port_position = fuzzy_loop(debug, fuzzy_data, option_list)
+        debug_printout(debug, "patch_port_position", patch_port_position)
 
         # The position of the port on the network device
         print(f"\nIs the port on your network device centered, or is it on the top or bottom of the network device? (top/middle/bottom)")
-        optionListTwo = ["bottom", "middle", "top"]
-        fuzzyData = {
-            "cutoffValue": 0.45,
+        option_list = ["bottom", "middle", "top"]
+        fuzzy_data = {
+            "cutoff_value": 0.45,
             "input": f"Port position (top/middle/bottom) {syntax} "
         }
-        devicePortPosition = fuzzy_loop(debug, fuzzyData, optionListTwo)
-        debug_printout(debug, "devicePortPosition", devicePortPosition)
+        device_port_position = fuzzy_loop(debug, fuzzy_data, option_list)
+        debug_printout(debug, "device_port_position", device_port_position)
 
         # Get the left // right distance between the ports
         print(f"\nWhat is the distance between the ports, left to right? please count the distance by counting how many ports apart the switches,\nwether it is left or right doesn't matter")
-        inputData = {
-                "maxValue": 32,    # Max gap before error
-                "minValue": 0  ,   # Min gap before error
+        input_data = {
+                "max_value": 32,    # Max gap before error
+                "min_value": 0  ,   # Min gap before error
                 "input": f"The gap between the network device and patch panel {syntax} "
             }
-        debug_value_printout(debug, inputData)
-        portDistance = input_loop(debug, inputData)
-        debug_printout(debug, "portDistance", portDistance)
+        debug_value_printout(debug, input_data)
+        port_distance = input_loop(debug, input_data)
+        debug_printout(debug, "port_distance", port_distance)
         # grab the final calculation for the adv mode
-        pointToPointDist = distance_math_function(uHeight, patchPortPosition, devicePortPosition, portDistance, debug) # Please note that the scaling now exists INSIDE the function
+        point_to_point_dist = distance_math_function(u_height, patch_port_position, device_port_position, port_distance, debug) # Please note that the scaling now exists INSIDE the function
 
     # Return gathered vars :P
-    return minBendRadius, maxBendRadius, connectorSize, slackCutoff, pointToPointDist
+    return min_bend_radius, max_bend_radius, connector_size, slack_cutoff, point_to_point_dist

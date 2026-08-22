@@ -1,9 +1,9 @@
 import traceback
 
-def debug_printout(debug, valueName, valuePrintout):
+def debug_printout(debug, value_name, value_printout):
     if debug in (1, 3):
-        print(f"\n\033[31mDEBUG PRINTOUT, the value of {valueName} is {valuePrintout}\033[32m")
-# debug_printout(debug, "VAR NAME HERE", numericValue)
+        print(f"\n\033[31mDEBUG PRINTOUT, the value of {value_name} is {value_printout}\033[32m")
+# debug_printout(debug, "VAR NAME HERE", numeric_value)
 
 def debug_exception(debug, exception):
     if debug in (2, 3):
@@ -11,12 +11,12 @@ def debug_exception(debug, exception):
         traceback.print_exc()
 # debug_exception(debug, exception)
 
-def debug_value_printout(debug, inputData):
+def debug_value_printout(debug, input_data):
     if debug in (1, 3):
         # Extracted the values from inputData
-        maxValue = inputData["maxValue"]
-        minValue = inputData["minValue"]
-        print(f"\n\033[31mDEBUG PRINTOUT, the MIN value listed is {minValue}\033[32m")
-        print(f"\n\033[31mDEBUG PRINTOUT, the MAX value listed is {maxValue}\033[32m")
+        max_value = input_data["max_value"]
+        min_value = input_data["min_value"]
+        print(f"\n\033[31mDEBUG PRINTOUT, the MIN value listed is {min_value}\033[32m")
+        print(f"\n\033[31mDEBUG PRINTOUT, the MAX value listed is {max_value}\033[32m")
 # except Exception as exception
-# debug_value_printout(debug, inputData)
+# debug_value_printout(debug, input_data)

@@ -8,9 +8,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: "5")
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 10,
-                "minValue": 1,
+            input_data = {
+                "max_value": 10,
+                "min_value": 1,
                 "input": "Value"
             }
         )
@@ -21,9 +21,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: "5.506")
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 10,
-                "minValue": 1,
+            input_data = {
+                "max_value": 10,
+                "min_value": 1,
                 "input": "Value"
             }
         )
@@ -34,9 +34,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: "5.5067888")
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 10,
-                "minValue": 1,
+            input_data = {
+                "max_value": 10,
+                "min_value": 1,
                 "input": "Value"
             }
         )
@@ -48,9 +48,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 20,
-                "minValue": 10,
+            input_data = {
+                "max_value": 20,
+                "min_value": 10,
                 "input": "Value"
             }
         )
@@ -67,9 +67,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 20,
-                "minValue": 5,
+            input_data = {
+                "max_value": 20,
+                "min_value": 5,
                 "input": "Value"
             }
         )
@@ -86,9 +86,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 20,
-                "minValue": 10,
+            input_data = {
+                "max_value": 20,
+                "min_value": 10,
                 "input": "Value"
             }
         )
@@ -101,9 +101,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: "30")
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 30,
-                "minValue": 10,
+            input_data = {
+                "max_value": 30,
+                "min_value": 10,
                 "input": "Value"
             }
         )
@@ -114,9 +114,9 @@ class TestInputLoop:
         monkeypatch.setattr("builtins.input", lambda _: "10")
         result = input_loop(
             debug = 0,
-            inputData = {
-                "maxValue": 20,
-                "minValue": 10,
+            input_data = {
+                "max_value": 20,
+                "min_value": 10,
                 "input": "Value"
             }
         )
@@ -131,8 +131,8 @@ class TestFuzzyLoop:
         monkeypatch.setattr("builtins.input", lambda _: "ADV")
         result = fuzzy_loop(
             debug = 0,
-            optionList = ["ez", "adv"],
-            fuzzyData = {
+            option_list = ["ez", "adv"],
+            fuzzy_data = {
                 "cutoffValue": 0.45,
                 "input": f"Mode"  
             }
@@ -146,8 +146,8 @@ class TestFuzzyLoop:
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = fuzzy_loop(
             debug = 0,
-            optionList = ["ez", "adv"],
-            fuzzyData = {
+            option_list = ["ez", "adv"],
+            fuzzy_data = {
                 "cutoffValue": 0.35,
                 "input": f"Mode"  
             }
@@ -164,8 +164,8 @@ class TestFuzzyLoop:
         monkeypatch.setattr("builtins.input", lambda _: next(inputs))
         result = fuzzy_loop(
             debug = 0,
-            optionList=["ez", "adv"],
-            fuzzyData={
+            option_list=["ez", "adv"],
+            fuzzy_data={
                 "cutoffValue": 1.00,
                 "input": "Mode"
             }
@@ -181,8 +181,8 @@ class TestFuzzyLoop:
         monkeypatch.setattr("builtins.input", lambda _: "Centralized")
         result = fuzzy_loop(
             debug = 0,
-            optionList = ["central", "centralized", "tipper", "centered"],
-            fuzzyData = {
+            option_list = ["central", "centralized", "tipper", "centered"],
+            fuzzy_data = {
                 "cutoffValue": 0.8,
                 "input": f"Mode"  
             }

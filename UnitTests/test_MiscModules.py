@@ -9,8 +9,8 @@ class TestDebugPrintout:
     def test_debug_printout_off(self, capsys):
         debug_printout(
             debug = 0,
-            valueName="testValue",
-            valuePrintout=123
+            value_name="testValue",
+            value_printout=123
         )
         captured = capsys.readouterr()
         assert captured.out == ""
@@ -19,8 +19,8 @@ class TestDebugPrintout:
     def test_debug_printout_basic(self, capsys):
         debug_printout(
             debug = 1,
-            valueName="testValue",
-            valuePrintout=123
+            value_name="testValue",
+            value_printout=123
         )
         captured = capsys.readouterr()
         assert "DEBUG PRINTOUT" in captured.out
@@ -31,12 +31,12 @@ class TestDebugPrintout:
     def test_debug_printout_advanced(self, capsys):
         debug_printout(
             debug = 3,
-            valueName="testValue",
-            valuePrintout=123
+            value_name="test_value",
+            value_printout=123
         )
         captured = capsys.readouterr()
         assert "DEBUG PRINTOUT" in captured.out
-        assert "testValue" in captured.out
+        assert "test_value" in captured.out
         assert "123" in captured.out
 
 # Unit tests for the "debug_exception" are inside of this class
@@ -84,26 +84,26 @@ class TestDebugValuePrintout:
 
     # Debug 0 **should** print nothing
     def test_debug_value_printout_off(self, capsys):
-        inputData = {
-            "minValue": 1,
-            "maxValue": 10
+        input_data = {
+            "min_value": 1,
+            "max_value": 10
         }
         debug_value_printout(
             debug = 0,
-            inputData = inputData
+            input_data = input_data
         )
         captured = capsys.readouterr()
         assert captured.out == ""
 
     # Debug 1 **should** print
     def test_debug_value_printout_basic(self, capsys):
-        inputData = {
-            "minValue": 1,
-            "maxValue": 10
+        input_data = {
+            "min_value": 1,
+            "max_value": 10
         }
         debug_value_printout(
             debug = 1,
-            inputData=inputData
+            input_data=input_data
         )
         captured = capsys.readouterr()
         assert "MIN" in captured.out
@@ -113,13 +113,13 @@ class TestDebugValuePrintout:
 
     # Debug 3 **should** print
     def test_debug_value_printout_advanced(self, capsys):
-        inputData = {
-            "minValue": 1,
-            "maxValue": 10
+        input_data = {
+            "min_value": 1,
+            "max_value": 10
         }
         debug_value_printout(
             debug = 3,
-            inputData=inputData
+            input_data=input_data
         )
         captured = capsys.readouterr()
         assert "MIN" in captured.out

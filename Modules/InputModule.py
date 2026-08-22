@@ -5,25 +5,25 @@ class ValueTooHigh(Exception):
 class ValueTooLow(Exception):
     pass
 
-def input_loop(debug, inputData):
+def input_loop(debug, input_data):
     while True:
         try:
-            # Extracted the values from inputData
-            maxValue = inputData["maxValue"]
-            minValue = inputData["minValue"]
-            outputText = inputData ["input"]
+            # Extracted the values from input_data
+            max_value = input_data["max_value"]
+            min_value = input_data["min_value"]
+            outputText = input_data ["input"]
 
             # Asks the user for the value
-            numericValue = float(input(f"\033[34m{outputText}\033[0m"))
+            numeric_value = float(input(f"\033[34m{outputText}\033[0m"))
 
             # I feel like this is a rare case where the code is self-documenting
-            if numericValue > maxValue:
+            if numeric_value > max_value:
                 raise ValueTooHigh
-            elif numericValue < minValue:
+            elif numeric_value < min_value:
                 raise ValueTooLow
-            else: # This isn't needed, I may remove in the future but I might try something first
-                numericValue = round(numericValue, 2)
-                break
+
+            numeric_value = round(numeric_value, 2)
+            break
 
         # All of the exception checks
         except ValueError as exception:
@@ -32,12 +32,12 @@ def input_loop(debug, inputData):
             debug_exception(debug, exception)
         except ValueTooHigh as exception:
             print("\n\033[31mInvalid input. Input is too high!\033[32m")
-            print(f"   (The maximum value allowed is {maxValue}, you entered {numericValue})")
+            print(f"   (The maximum value allowed is {max_value}, you entered {numeric_value})")
             debug_exception(debug, exception)
         except ValueTooLow as exception:
             print("\n\033[31mInvalid input. Input is too low!\033[32m")
-            print(f"   (The minimum value allowed is {minValue}, you entered {numericValue})")
+            print(f"   (The minimum value allowed is {min_value}, you entered {numeric_value})")
             debug_exception(debug, exception)
         except Exception as exception:
             debug_exception(debug, exception)
-    return numericValue # note that this will be any VAR for whatever called this function
+    return numeric_value # note that this will be any VAR for whatever called this function
