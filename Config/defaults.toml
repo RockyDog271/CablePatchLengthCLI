@@ -1,0 +1,31 @@
+# -- DO NOT EDIT THIS --
+# THESE ARE THE DEFAULTS
+
+[application]
+debug_level = 0
+answer_separator = "="
+decimal_places = 2
+
+[fuzzy_matching]
+cutoff = 0.45
+
+[limits]
+min_bend_radius_min = 0.75
+clearance_min = 1.5
+clearance_max = 30.0
+connector_size_min = 0.25
+connector_size_max = 5.0
+slack_cutoff_min = 0.25
+slack_cutoff_max = 5.0
+ez_mode_dist_min = 2.25
+ez_mode_dist_max = 240.0
+
+[geometry]
+inches_per_rack_u = 1.75
+inches_per_port = 0.50
+top_port_offset = -0.75
+middle_port_offset = -0.85
+bottom_port_offset = 1.25
+
+[calculation]
+connector_unusable_length_per_end = 0.25

@@ -1,12 +1,12 @@
 # ROADMAP  
-## Current Version is V0.3  
+## If you are reading this, You are on EXPERIMENTAL (V0.3.1 - V0.3.9)  
   
 ## Planned changes for V0.4+  
 > Ability to loop the project from Main, perhaps a menu  
 > Changing of the dictionaries used to classes  
 > Moving the options (syntax, debug, values, magic numbers, etc) to a centralized file  
 > change Hardcoded ANSI to colorama  
-> Wildcards are used for imports, Removal of that  
+> Add classes to function calls instead of list  
   
 ## Planned changes for V0.5+  
 > Explore/enable a better way to enable implement scripting  

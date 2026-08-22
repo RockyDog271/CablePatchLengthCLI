@@ -1,0 +1,30 @@
+# -- EDIT THESE --
+# These are editable overrides 
+
+
+[application]               # These control basic application level settings
+debug_level = 0             # Options are 0 for OFF, 1 for Val-Prints, 2 for Exceptions, and 3 for all
+answer_separator = "="      # This is the syntax in the menu, options are typically "=". ">>" and ":"
+decimal_places = 2          # This is to what decimal place the answers are rounded too, default is 2  (  ie: (0.00)  )
+
+[fuzzy_matching]            # This changes how strict the fuzzy-matching is
+cutoff = 0.45               # Tested are 0.45 (not strict), 0.75 (you have to get close), and 0.85 (near exact)
+
+[limits]                    # These are the values for the MIN/MAX values used, most likely what you want to customize
+min_bend_radius_min = 0.75  # The MIN bend radius of a cable that will be accepted
+connector_size_min = 0.25   # The MIN connector size that will be accepted
+connector_size_max = 5.0    # The MAX connector size that will be accepted
+slack_cutoff_min = 0.25     # The MIN amount of cable shielding removal that will be accepted
+slack_cutoff_max = 5.0      # The MAX amount of cable shielding removal that will be accepted
+ez_mode_dist_min = 2.25     # The MIN amount of cable flat-plane-length (2D) that will be accepted
+ez_mode_dist_max = 240.0    # The MAX amount of cable flat-plane-length (2D) that will be accepted
+
+[geometry]                  # The geometry used for the math :3
+inches_per_rack_u = 1.75    # The standard U height, not recommend to change
+inches_per_port = 0.50      # The width of a port, taken via a RJ45 passthrough keystone jack (typically on a rack there are 24 of these)
+top_port_offset = -0.75     # This was measured from the top of a Cisco2960 to the center on the highest port
+middle_port_offset = -0.85  # This was measured from the top of a CiscoASA  to the center of the centered port
+bottom_port_offset = 1.25   # This was measured from the top of a Cisco2960 to the center on the lowest port
+
+[calculation]
+connector_unusable_length_per_end = 0.25  # You know how the cable doesn't go though the entire termination? anyway... change this to be higher if you have a skill issue
