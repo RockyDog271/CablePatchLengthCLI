@@ -24,8 +24,8 @@ try:
     initial_startup_script(debug)
     min_bend_radius, max_bend_radius, connector_size, slack_cutoff, point_to_point_dist = data_input_script(debug, syntax)
     CBLLN = cable_length_calc (min_bend_radius, max_bend_radius, connector_size, slack_cutoff, point_to_point_dist)
-    print(f"------------------------------------------")
-    print(f"\n   CableLength to cut is {CBLLN} inches!^^\n")
-    print(f"------------------------------------------")
+    print(f"-------------------------------------------------------")
+    print(f"\n   the amount of cable to cut should be {CBLLN} inches!^^\n")
+    print(f"-------------------------------------------------------")
 except Exception as exception:
     debug_exception(debug, exception)
