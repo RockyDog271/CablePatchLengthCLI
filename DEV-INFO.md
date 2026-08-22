@@ -13,7 +13,7 @@
 # Installing dev-tools
 (Linux / Windows)
 > python -m pip install --upgrade pip
-> pip install -r requirements.dev.txt
+> pip install -r requirements-dev.txt
 
 # Testing the code
 (Linux / Windows)

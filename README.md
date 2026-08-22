@@ -8,8 +8,8 @@ A Python command-line tool designed to calculate the recommended cut length for 
 > Input validation with minimum and maximum values  
 > Modular Python structure  
 > Rounded calculations to two decimal places  
-> Basic - Advance debug printout and traceback options
-> Unit tests for development assistance
+> Basic - Advance debug printout and traceback options  
+> Unit tests for development assistance  
 
 The program calculates the recommended cable length using several measurements:  
 > Minimum cable bend radius  
@@ -17,23 +17,17 @@ The program calculates the recommended cable length using several measurements:
 > Connector length  
 > Termination slack  
 > Port-to-port distance  
-
-## V0.4 Planned Features  
-menu options at the start of the program  
-I forgot that classes exist so changing the dictionary's being used to classes instead  
-change the values to be in a centralized place
-add support for proper scripting
-
-## V0.5 Planned Features
-add black/flake/pylint
-consider changing everything to snake-case
-change Hardcoded ANSI to colorama
-add ability to automate scripts
-add docstrings / type hints
-
-## V0.6 Planned Features
-
-## Known Bugs
-Bugfix of the "maxbendradius" having too much effect on the cable length when more then 6"  
-Bugfix of max bend radius prompt should actually be a max clearence prompt for clarity
-Bugfix of patchportposition and deviceportposition should actually be top device/patchpanel and bottom device/patchpanel
+  
+## Relevant Information
+This is a practice project, used to help develop my overall python skills.  
+This does not mean that it is untested, I use this program for all of my patch cable calculations,  
+I came up with the idea for this practice project when I was making an excel equation to automate this, and figured it would be good code practice.  
+- Note by: Logan Simila, 08/21/2026  
+  
+## Currently Known Bugs  
+BUG: "maxbendradius" variable has too much effect on the cable length when <6"  
+-> Discovered by Logan when making some open-air patch cables  
+  
+CLARITY: The prompt asking for clearance goes to the VAR "maxBendRadius" when it should be something like "clearance" or smthn  
+  
+CLARITY: patchPortPosition and devicePortPosition are hard coded to ontop of eachother, this can be remedied by changing to topMounted and lowerMounted or smthn  
