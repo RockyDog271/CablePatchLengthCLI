@@ -4,7 +4,7 @@ from difflib import get_close_matches # Needed for the fuzzy matching of the mod
 # from .DebugModule import debug_printout
 
 def fuzzy_loop(debug, fuzzy_data, option_list):
-    fuzz_amount = fuzzy_data["cutoffValue"]
+    fuzz_amount = fuzzy_data["cutoff_value"]
     output_text = fuzzy_data["input"]
 
     while True:

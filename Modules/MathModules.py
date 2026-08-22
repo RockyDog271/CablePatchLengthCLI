@@ -29,12 +29,10 @@ def distance_math_function(u_height, patch_port_position, device_port_position, 
     return point_to_point_dist
 
 def cable_length_calc (min_bend_radius, max_bend_radius, connector_size, slack_cutoff, point_to_point_dist):
-    if min_bend_radius < 1.5:
-        max_bend_radius = max_bend_radius + 1.5
     cable_length = connector_size * 2                   # Takes the connector size and *2 (for each side)
     cable_length = cable_length - (0.25 * 2)            # Subtracts the .25 that the cable doesn't pull through the connector (for each side)
     cable_length = cable_length + point_to_point_dist   # Adds the main length factor
-    cable_length = cable_length + (max_bend_radius//3)  # This works good for me when it comes to adding bend
+    # cable_length = cable_length + (max_bend_radius//3)  # This works good for me when it comes to adding bend # It just broken AF
     cable_length = cable_length + (slack_cutoff * 2)    # adding the slack cutoff for both ends of the cable
     cable_length = round(cable_length, 2)    
     return cable_length

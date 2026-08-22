@@ -30,16 +30,19 @@ def data_input_script (debug, syntax):
     debug_printout(debug, "min_bend_radius", min_bend_radius)
 
     # Gets value for the maximum bend radius of the cable (max_bend_radius)
-    print(f"\nWhat is the max clearance before the cables conflict with an obstacle? (in inches)?")
-    print(f"   (If you don't know, just type thirty (30) )")
-    input_data = {
-        "max_value": 30,   # Max clearance before error
-        "min_value": 1.5,  # Min clearance before error
-        "input": f"Clearance {syntax} "
-    }
-    debug_value_printout(debug, input_data)
-    max_bend_radius = input_loop(debug, input_data)
-    debug_printout(debug, "max_bend_radius", max_bend_radius)
+    # print(f"\nWhat is the max clearance before the cables conflict with an obstacle? (in inches)?")
+    # print(f"   (If you don't know, just type thirty (30) )")
+    # input_data = {
+    #     "max_value": 30,   # Max clearance before error
+    #     "min_value": 1.5,  # Min clearance before error
+    #     "input": f"Clearance {syntax} "
+    # }
+    # debug_value_printout(debug, input_data)
+    # max_bend_radius = input_loop(debug, input_data)
+    # if max_bend_radius == 30:
+    #     max_bend_radius == 3
+    # debug_printout(debug, "max_bend_radius", max_bend_radius)
+    max_bend_radius = 0.00
 
     # Gets value for the size of the connectors used (in inches) this is the connector_size Var
     print(f"\nWhat is the size of the connectors you are using on these patch cables? (in inches pls)")

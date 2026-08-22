@@ -12,7 +12,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2.00,
             point_to_point_dist = 7.4
         )
-        assert result == 15.4
+        assert result == 14.4
 
     # This tests the output when the bend radius is smaller than expected
     def test_cable_length_small_bend_radius(self):
@@ -23,7 +23,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2.50,
             point_to_point_dist = 10
         )
-        assert result == 25.5
+        assert result == 15.5
 
     # This tests the output when the bend radius is much larger than what might be expected
     def test_cable_length_large_bend_radius(self):
@@ -34,7 +34,7 @@ class TestCableLengthCalc:
             slack_cutoff = 5,
             point_to_point_dist = 10
         )
-        assert result == 28.1
+        assert result == 24.1
 
     # This tests the output when the inputs are overly precise
     def test_cable_length_decimal_values(self):
@@ -45,7 +45,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2.5033,
             point_to_point_dist = 10.666666666666667
         )
-        assert result == 20.09
+        assert result == 18.09
 
     # This tests the output when there is zero(0) slack
     def test_cable_length_zero_slack(self):
@@ -56,7 +56,7 @@ class TestCableLengthCalc:
             slack_cutoff = 0.00,
             point_to_point_dist = 8
         )
-        assert result == 10.5
+        assert result == 9.5
 
     # This tests the output with no distance in the patch cable, ie: bluetooth connection lol
     def test_cable_length_zero_distance(self):
@@ -67,7 +67,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2,
             point_to_point_dist = 0.00
         )
-        assert result == 6.5
+        assert result == 5.5
 
     # This tests the output when the bend radius is really large?
     def test_cable_length_boundary_bend_radius(self):
@@ -78,7 +78,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2,
             point_to_point_dist = 60
         )
-        assert result == 66.5
+        assert result == 65.5
 
     # This has a bunch of decimal places to make sure rounding is properly happening
     def test_cable_length_rounding(self):
@@ -89,7 +89,7 @@ class TestCableLengthCalc:
             slack_cutoff = 2.0000001,
             point_to_point_dist = 10.0000001
         )
-        assert result == 16.5
+        assert result == 15.5
 
 # Unit tests for the "distance_math_function" are inside of this class
 class TestDistanceMathFunction:

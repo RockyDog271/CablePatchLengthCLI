@@ -133,7 +133,7 @@ class TestFuzzyLoop:
             debug = 0,
             option_list = ["ez", "adv"],
             fuzzy_data = {
-                "cutoffValue": 0.45,
+                "cutoff_value": 0.45,
                 "input": f"Mode"  
             }
         )
@@ -148,7 +148,7 @@ class TestFuzzyLoop:
             debug = 0,
             option_list = ["ez", "adv"],
             fuzzy_data = {
-                "cutoffValue": 0.35,
+                "cutoff_value": 0.35,
                 "input": f"Mode"  
             }
         )
@@ -166,7 +166,7 @@ class TestFuzzyLoop:
             debug = 0,
             option_list=["ez", "adv"],
             fuzzy_data={
-                "cutoffValue": 1.00,
+                "cutoff_value": 1.00,
                 "input": "Mode"
             }
         )
@@ -183,7 +183,7 @@ class TestFuzzyLoop:
             debug = 0,
             option_list = ["central", "centralized", "tipper", "centered"],
             fuzzy_data = {
-                "cutoffValue": 0.8,
+                "cutoff_value": 0.8,
                 "input": f"Mode"  
             }
         )

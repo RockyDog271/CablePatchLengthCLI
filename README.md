@@ -28,6 +28,9 @@ I came up with the idea for this practice project when I was making an excel equ
 BUG: "maxbendradius" variable has too much effect on the cable length when <6"  
 -> Discovered by Logan when making some open-air patch cables  
   
+BUG" Clearance values are completely broken and isn't important atp in time, removed
+-> Discovered by Logan when making cabled for a friend
+
 CLARITY: The prompt asking for clearance goes to the VAR "maxBendRadius" when it should be something like "clearance" or smthn  
   
 CLARITY: patchPortPosition and devicePortPosition are hard coded to ontop of eachother, this can be remedied by changing to topMounted and lowerMounted or smthn  
