@@ -8,10 +8,10 @@ from .DebugModule import debug_printout
 def initial_startup_script (debug):
 # A bunch of print statements to start the program in CLI
     print(f"\n\n")
-    print(f"     --------------------------------------------     ")
+    print(f"       --------------------------------------------     ")
     print(f"     ------------ \033[32mCable Patch Length CLI\033[0m --------------     ")
     print(f"   ------------------  \033[34mBy Rocky :3c\033[0m  ----------------     ")
-    print(f"     --------------------------------------------     ")
+    print(f"       --------------------------------------------     ")
     print(f"\n")
 # START \033[34m AND \033[32m
 # END \033[0m

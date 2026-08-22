@@ -3,6 +3,7 @@
 
     **Minor changes**
         BUGFIX: Changed variables inside source code to snake_case
+        BUGFIX: Removed wildcard imports in source code
 
 # V0.3  
     ADDED created a debug system, adv, basic, or both  
